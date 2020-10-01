@@ -1,7 +1,9 @@
 """
 This file will prepare our raw data into a more contained version of itself
+This comes from NLP13 of KGB Talkie
 """
 
+from textblob import TextBlob
 import os
 import re
 import sys
@@ -170,3 +172,17 @@ rare20 = freq_comm[-20:]
 rare = freq_comm[freq_comm.values == 1]
 df['twitts'].apply(lambda x: ' '.join(
     [words for words in x.split() if words not in rare]))
+
+
+# Spelling Correction
+# I need to use a package called textblob
+# pip install -U text blob && python -m textblob.download_corpora
+
+
+x = 'tanks forr waching this vidio caRR'
+x = TextBlob(x)
+x = TextBlob(x).correct()
+# This is not a perfect solution but does work a little better
+
+# REmove punctuations and numbers
+sent = re.sub('[^a-zA-Z]', ' ', sen)
