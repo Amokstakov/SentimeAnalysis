@@ -19,11 +19,23 @@ step 2:
             df['target_col'].value_counts()
         
         Look for:
-            Word Count 
+            Word Count:
+                .apply(lambda x: len(str(x).split()))
+            Stop Word Count
+                .apply(lambda x: len([word for word in x.split() if word in STOP_WORDS]))
+            Char Count
+                .apply(lambda x: len(str(x)))
+            Punctuation Count
+                .apply(lambda x: len([c for c in x.split() if c in string.punctuation]))
             Avrg Word Count
+                def (x):
+                    words = x.split()
+                    word_len = 0
+                    for word in words:
+                        word_len = word_len + len(word)
+                    return word_len/len(words)
+                    
+
             Most used word
             least used word
-            len of stop words
-            Distribution of labels 
-
 """

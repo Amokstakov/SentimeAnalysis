@@ -55,7 +55,8 @@ Look at Meta Features such as:
 df['Word_count'] = df['Tweets'].apply(lambda x: len(str(x).split()))
 
 # stop_word count
-df['Stop_word_count'] = df['Tweets'].apply(lambda x: len(set(str(x).split())))
+df['Stop_word_count'] = df['Tweets'].apply(lambda x: len(
+    [word for word in x.split() if word in STOP_WORDS]))
 
 # get character count
 df['Char_count'] = df['Tweets'].apply(lambda x: len(str(x)))
@@ -69,5 +70,37 @@ df['Mention_count'] = df['Tweets'].apply(
     lambda x: len([t for t in x.split() if t.startswith('@')]))
 
 # get hashtags
-df['Hashtah_count'] = df['Tweets'].apply(
+df['Hashtag_count'] = df['Tweets'].apply(
     lambda x: len([t for t in x.split() if t.startswith('#')]))
+
+# get average word len
+
+
+def get_avrg_word_len(x):
+    words = x.split()
+    word_len = 0
+    for word in words:
+        word_len = word_len + len(word)
+    return word_len/len(words)
+
+
+df['Avrg_word_len'] = df['Tweets'].apply(lambda x: get_avrg_word_len(x))
+
+
+print(df['Word_count'])
+print('---------------------')
+print(df['Stop_word_count'])
+print('---------------------')
+print(df['Char_count'])
+print('---------------------')
+print(df['Punctuation_count'])
+print('---------------------')
+print(df['Mention_count'])
+print('---------------------')
+print(df['Hashtag_count'])
+print('---------------------')
+print(df['Avrg_word_len'])
+print('---------------------')
+
+
+# Find most frequent and rarest word ocrruences
