@@ -113,3 +113,6 @@ Step 3:
 
 
 """
+
+#❯ psql -h localhost -p 5432 -U postgres
+
